@@ -1,17 +1,19 @@
-import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Cadastro from "./Cadastro/Cadastro";
 import { GlobalStyle } from "../assets/globalStyles";
 
 export default function App() {
     return (
         <>  
-            <GlobalStyle />
-            <Titulo> HEllo World </Titulo>
+            <BrowserRouter>
+                <GlobalStyle />
+                <Routes>
+                    <Route path="/cadastro" element={<Cadastro />} />
+                </Routes>
+            </BrowserRouter>
+
         </>
     )
 }
 
-const Titulo = styled.h1`
-    font-size: 25px;
-    font-weight: 700;
-    color: red;
-`
