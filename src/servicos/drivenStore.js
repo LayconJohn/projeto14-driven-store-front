@@ -7,7 +7,12 @@ function cadastrarUser(body) {
     return promisse;
 }
 
+function loginUser(body) {
+    const promisse = axios.post(`${BASE_URL}/login`, body);
+    return promisse;
+}
+
 export {
     cadastrarUser,
-
+    loginUser,
 }
