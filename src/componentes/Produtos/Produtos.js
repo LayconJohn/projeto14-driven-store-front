@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 export default function Produtos() {
   const [produtos, setProdutos] = useState();
@@ -7,14 +8,14 @@ export default function Produtos() {
     const promise = axios.get(`http://localhost:5000/produtos`);
     promise.then((res) => setProdutos(res.data));
   }, []);
-
+  const navigate = useNavigate();
   return (
     <Container>
       {produtos?.map((res) => (
-        <Item>
+        <Item key={res.id} onClick={() => navigate(`/produtos/${res.id}`)}>
           <img src={res.image} />
           <p>{res.title}</p>
-          <p>{res.price}</p>
+          <p>R${res.price.toFixed(2)}</p>
         </Item>
       ))}
     </Container>
@@ -27,6 +28,7 @@ const Container = styled.div`
   background-color: #f4f4f4;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
 `;
 const Item = styled.div`
   width: 150px;
@@ -47,6 +49,13 @@ const Item = styled.div`
     height: auto;
   }
   p {
+    height: 25px;
+    width: 150px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     text-align: center;
   }
 `;
