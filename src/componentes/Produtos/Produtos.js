@@ -39,6 +39,7 @@ const Item = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  box-shadow: 10px 5px 5px #eeeaea;
   img {
     max-width: 100px;
     max-height: 100px;
