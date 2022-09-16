@@ -12,7 +12,10 @@ export default function Produtos() {
   return (
     <Container>
       {produtos?.map((res) => (
-        <Item key={res.id} onClick={() => navigate(`/produtos/${res.id}`)}>
+        <Item
+          key={res.id}
+          onClick={() => navigate(`/produtos/${res._id}`, { state: res._id })}
+        >
           <img src={res.image} />
           <p>{res.title}</p>
           <p>R${res.price.toFixed(2)}</p>
