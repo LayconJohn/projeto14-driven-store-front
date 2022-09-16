@@ -28,7 +28,7 @@ export default function Login() {
         loginUser(body)
             .then((res) => {
                 setUser(res.data)
-                navigate("/produtos")
+                navigate("/")
             })
             .catch((err) => {
                 console.log(err);
@@ -81,8 +81,9 @@ export default function Login() {
 
 const Tela = styled.div`
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0px 25px;
 `;

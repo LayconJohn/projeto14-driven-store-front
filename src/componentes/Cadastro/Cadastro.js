@@ -34,7 +34,7 @@ export default function Cadastro() {
         cadastrarUser(body)
             .then( (res) => {
                 console.log(res.data);
-                navigate("/");
+                navigate("/login");
             })
             .catch( (err) => {
                 alert("Erro ao cadastrar, tente novamente");
@@ -96,7 +96,7 @@ export default function Cadastro() {
                     }
                 </FormButton>
             </form>
-            <Legenda onClick={() => navigate("/")}> Já Possui cadastro? </Legenda>
+            <Legenda onClick={() => navigate("/login")}> Já Possui cadastro? </Legenda>
         </Tela>
     )
 
