@@ -1,17 +1,14 @@
-import styled from "styled-components";
-import { GlobalStyle } from "../assets/globalStyles";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Item from "./Item/Item";
+import Produtos from "./Produtos/Produtos";
 export default function App() {
   return (
-    <>
-      <GlobalStyle />
-      <Titulo> HEllo World </Titulo>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Produtos />} />
+        <Route path="/produtos/:id" element={<Item />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-const Titulo = styled.h1`
-  font-size: 25px;
-  font-weight: 700;
-  color: red;
-`;
