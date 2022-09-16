@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -72,12 +72,13 @@ a {
 button{
 	cursor:pointer;
 }
-`;
 
-  * {
+* {
     box-sizing: border-box;
   }
+
 `;
+
 
 
 const TituloLogo = styled.h1`
@@ -88,8 +89,8 @@ const TituloLogo = styled.h1`
   font-family: 'Rubik Glitch', cursive;
   text-align: center;
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 5px;
+  top: 50px;
 
 `;
 
@@ -119,9 +120,9 @@ const FormInput = styled.input`
   border-radius: 15px;
   border: 1px solid #CACACC;
   background-color: rgba(255, 255, 255, 0.05);
-  margin-top: 10px;
   color: white;
-  padding: 0 5px;
+  margin: 5px 10px;
+  padding: 0 15px;
 `;
 
 const FormButton = styled.button`
@@ -130,7 +131,7 @@ const FormButton = styled.button`
   border-radius: 30px;
   border: 1px solid #CACACC;
   background-color: transparent;
-  margin-top: 15px;
+  margin: 15px 10px;
   color: white;
 `;
 
