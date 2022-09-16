@@ -51,8 +51,13 @@ const Container = styled.div`
   height: 100vh;
   margin: 0 auto;
   background-color: #f4f4f4;
-
-  box-sizing: border-box;
+  p {
+    margin: 10px;
+    text-align: justify;
+  }
+  h1 {
+    margin: 10px;
+  }
 `;
 const Produto = styled.div`
   display: flex;

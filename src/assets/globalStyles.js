@@ -61,5 +61,3 @@ button{
 }
 `;
 export default GlobalStyle;
-
-export { GlobalStyle };
