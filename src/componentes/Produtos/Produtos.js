@@ -2,15 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Menu from "../Menu/Menu";
 export default function Produtos() {
   const [produtos, setProdutos] = useState();
+  const [todos, setTodos] = useState(false);
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos`);
     promise.then((res) => setProdutos(res.data));
-  }, []);
+  }, [todos]);
   const navigate = useNavigate();
   return (
     <Container>
+      <Menu setProdutos={setProdutos} setTodos={setTodos} todos={todos} />
       {produtos?.map((res) => (
         <Item
           key={res.id}
