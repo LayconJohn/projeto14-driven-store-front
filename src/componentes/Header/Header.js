@@ -1,6 +1,8 @@
 import axios from "axios";
 import styled from "styled-components";
 import { IoList } from "react-icons/io5";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header({ setProdutos }) {
   function listarProdutos(nome) {
@@ -11,11 +13,12 @@ export default function Header({ setProdutos }) {
       setProdutos(res.data);
     });
   }
+  const [menu, setMenu] = useState(false);
   return (
     <Container>
       <p>DrivenStore</p>
       <span>
-        <IoList size={"25px"} />
+        <IoList size={"25px"} onClick={() => setMenu(!menu)} />
       </span>
       <Topo>
         <h1 onClick={() => listarProdutos("todos")}>Todos</h1>
@@ -24,6 +27,16 @@ export default function Header({ setProdutos }) {
         <h1 onClick={() => listarProdutos("joias")}>Joías</h1>
         <h1 onClick={() => listarProdutos("eletronicos")}>Eletrônicos</h1>
       </Topo>
+      {!menu ? (
+        ""
+      ) : (
+        <Menu>
+          <Link to="/login">
+            <h2>Login</h2>
+          </Link>
+          <h2>Carrinho</h2>
+        </Menu>
+      )}
     </Container>
   );
 }
@@ -59,4 +72,14 @@ const Topo = styled.div`
     color: #ffffff;
     cursor: pointer;
   }
+`;
+
+const Menu = styled.div`
+  background-color: #ffffff;
+  position: fixed;
+  width: 50vw;
+  height: 50vw;
+  left: calc(100% - 200px);
+  top: 50px;
+  z-index: 1;
 `;
