@@ -18,7 +18,7 @@ export default function Produtos() {
         >
           <img src={res.image} />
           <p>{res.title}</p>
-          <p>R${res.price.toFixed(2)}</p>
+          <p>R${Number(res.price).toFixed(2)}</p>
         </Item>
       ))}
     </Container>
