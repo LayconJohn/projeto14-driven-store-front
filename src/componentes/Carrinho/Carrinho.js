@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { pegarCarrinho } from "../../servicos/drivenStore";
 
@@ -10,13 +11,20 @@ export default function Carrinho() {
     
     //hooks
     const {user} = useContext(UserContext);
+    const navigate = useNavigate();
 
     //logic
     useEffect( () => {
-
-        pegarCarrinho(user.token).then( (res) => {
-            setCarrinho(res.data);
-        })
+        const token = localStorage.getItem("token")
+        pegarCarrinho(token)
+            .then( (res) => {
+                setCarrinho(res.data);
+            })
+            .catch( (err) => {
+                console.log(err.message);
+                alert("Faça o login e tente novamente")
+                navigate("/login");
+            })
     }, [])
 
     //render
@@ -26,7 +34,9 @@ export default function Carrinho() {
             carrinho.length === 0 ? 
             "Carrinho vazio" 
             : 
-            <li>{carrinho.nome}</li>
+            carrinho.map( (value, index) => {
+                return <li>{value.nome}</li>
+            })
             }
         </>
     )

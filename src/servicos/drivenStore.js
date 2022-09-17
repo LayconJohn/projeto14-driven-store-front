@@ -12,6 +12,16 @@ function loginUser(body) {
     return promisse;
 }
 
+function pegarProdutos(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.get(`${BASE_URL}/produtos`, config);
+    return promisse;
+}
+
 function pegarCarrinho(token) {
     const config = {
         headers: {
@@ -26,4 +36,5 @@ export {
     cadastrarUser,
     loginUser,
     pegarCarrinho,
+    pegarProdutos,
 }

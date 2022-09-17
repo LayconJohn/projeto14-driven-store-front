@@ -41,8 +41,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-  font-family: Open-Sans, Helvetica, Sans-Serif;
-	font-family: 'Raleway', sans-serif;
+  	font-family: 'Raleway', sans-serif;
 background-color: #f4f4f4;
 }
 ol, ul {
