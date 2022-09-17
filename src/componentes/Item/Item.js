@@ -2,15 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 export default function Item() {
   const location = useLocation();
   const id = location.state;
   const navigate = useNavigate();
   const [item, setItem] = useState();
+
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
     promise.then((res) => setItem(res.data));
   }, []);
+
   const token = 1;
   console.log(item);
   function addCarrinho() {
@@ -46,18 +49,18 @@ export default function Item() {
       <Container>
         <Produto>
           <Imagem>
-            <img src={item.image} />
+            <img src={item.imagem} alt="item" />
           </Imagem>
           <div>
-            <p>{item.title}</p>
+            <p>{item.titulo}</p>
             <p>
-              <strong>R${item.price}</strong>
+              <strong>R${item.preco}</strong>
             </p>
             <button onClick={() => addCarrinho()}>Adicionar ao Carrinho</button>
           </div>
         </Produto>
         <h1>Descrição</h1>
-        <p>{item?.description}</p>
+        <p>{item?.descricao}</p>
       </Container>
     );
   } else {
