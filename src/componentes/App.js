@@ -8,9 +8,11 @@ import Cadastro from "./Cadastro/Cadastro";
 import Login from "./Login/Login";
 import { GlobalStyle } from "../assets/globalStyles";
 import Item from "./Item/Item";
+
 import Produtos from "./Produtos/Produtos";
 
 export default function App() {
+
     const [user, setUser] = useState({})
     return (
         <>  
@@ -29,6 +31,7 @@ export default function App() {
 
         </>
     )
+
 }
 
 

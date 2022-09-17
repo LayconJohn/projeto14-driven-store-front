@@ -2,17 +2,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 export default function Item() {
   const location = useLocation();
   const id = location.state;
   const navigate = useNavigate();
   const [item, setItem] = useState();
+
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
     promise.then((res) => setItem(res.data));
   }, []);
+
+  const token = 1;
   console.log(item);
   function addCarrinho() {
+    if (!item?.token) {
+      navigate("/");
+      return;
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const body = [
       {
         id: item._id,
@@ -21,30 +34,38 @@ export default function Item() {
         preco: item.price,
       },
     ];
-    const promise = axios.post(`http://localhost:5000/carrinho/${id}`, body);
+    const promise = axios.post(
+      `http://localhost:5000/carrinho/${id}`,
+      body,
+      config
+    );
     promise.then(() => {
       alert("Adicionado ao Carrinho");
       navigate("/");
     });
   }
-  return (
-    <Container>
-      <Produto>
-        <Imagem>
-          <img src={item?.image} />
-        </Imagem>
-        <div>
-          <p>{item?.title}</p>
-          <p>
-            <strong>R${item?.price}</strong>
-          </p>
-          <button onClick={() => addCarrinho()}>Adicionar ao Carrinho</button>
-        </div>
-      </Produto>
-      <h1>Descrição</h1>
-      <p>{item?.description}</p>
-    </Container>
-  );
+  if (item) {
+    return (
+      <Container>
+        <Produto>
+          <Imagem>
+            <img src={item.imagem} alt="item" />
+          </Imagem>
+          <div>
+            <p>{item.titulo}</p>
+            <p>
+              <strong>R${item.preco}</strong>
+            </p>
+            <button onClick={() => addCarrinho()}>Adicionar ao Carrinho</button>
+          </div>
+        </Produto>
+        <h1>Descrição</h1>
+        <p>{item?.descricao}</p>
+      </Container>
+    );
+  } else {
+    return <p>carregando</p>;
+  }
 }
 const Container = styled.div`
   width: 100vw;
