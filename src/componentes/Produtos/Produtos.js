@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import Header from "../Header/Header";
 
 export default function Produtos() {
@@ -12,7 +13,7 @@ export default function Produtos() {
     promise.then((res) => setProdutos(res.data));
   }, []);
   const navigate = useNavigate();
-  console.log(produtos);
+
   return (
     <Container>
       <Header setProdutos={setProdutos} />

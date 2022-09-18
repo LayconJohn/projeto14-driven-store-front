@@ -1,23 +1,24 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../Context/UserContext";
 
 export default function Item() {
   const location = useLocation();
   const id = location.state;
   const navigate = useNavigate();
   const [item, setItem] = useState();
-
+  const [quantidade, setQuantidade] = useState(1);
+  const { user } = useContext(UserContext);
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
     promise.then((res) => setItem(res.data));
   }, []);
 
-  const token = 1;
-  console.log(item);
+  const token = user.token;
   function addCarrinho() {
-    if (!item?.token) {
+    if (!token) {
       navigate("/");
       return;
     }
@@ -29,9 +30,10 @@ export default function Item() {
     const body = [
       {
         id: item._id,
-        titulo: item.title,
-        imagem: item.image,
-        preco: item.price,
+        titulo: item.titulo,
+        imagem: item.imagem,
+        preco: item.preco,
+        quantidade,
       },
     ];
     const promise = axios.post(
@@ -44,6 +46,7 @@ export default function Item() {
       navigate("/");
     });
   }
+  console.log(quantidade);
   if (item) {
     return (
       <Container>
@@ -56,7 +59,25 @@ export default function Item() {
             <p>
               <strong>R${item.preco}</strong>
             </p>
-            <button onClick={() => addCarrinho()}>Adicionar ao Carrinho</button>
+            <span>
+              <p>Quantidade</p>
+              <select
+                onChange={(event) => {
+                  setQuantidade(event.target.value);
+                }}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </span>
+            <div>
+              <button onClick={() => addCarrinho()}>
+                Adicionar ao Carrinho
+              </button>
+            </div>
           </div>
         </Produto>
         <h1>Descrição</h1>
