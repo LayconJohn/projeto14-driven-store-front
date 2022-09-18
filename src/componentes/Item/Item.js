@@ -11,13 +11,19 @@ export default function Item() {
 
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
-    promise.then((res) => setItem(res.data));
+    promise.then((res) => {
+      setItem(res.data)
+      console.log(res.data);
+    });
+    console.log("Id: " + id);
+   
   }, []);
 
-  const token = 1;
-  console.log(item);
+  
   function addCarrinho() {
-    if (!item?.token) {
+    console.log(item);
+    const token = localStorage.getItem("token");
+    if (!token) {
       navigate("/");
       return;
     }
@@ -26,14 +32,13 @@ export default function Item() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const body = [
-      {
+    const body = {
         id: item._id,
-        titulo: item.title,
-        imagem: item.image,
-        preco: item.price,
-      },
-    ];
+        titulo: item.titulo,
+        imagem: item.imagem,
+        preco: item.preco,
+      }
+
     const promise = axios.post(
       `http://localhost:5000/carrinho/${id}`,
       body,

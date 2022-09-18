@@ -1,15 +1,16 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../Header/Header";
 
+import { pegarProdutos } from "../../servicos/drivenStore";
+
 export default function Produtos() {
   const [produtos, setProdutos] = useState();
 
   useEffect(() => {
-    const promise = axios.get(`http://localhost:5000/produtos`);
-    promise.then((res) => setProdutos(res.data));
+    const token = localStorage.getItem("token");
+    pegarProdutos(token).then((res) => setProdutos(res.data));
   }, []);
   const navigate = useNavigate();
   console.log(produtos);

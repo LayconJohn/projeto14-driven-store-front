@@ -27,7 +27,9 @@ export default function Login() {
         const body = {email, senha};
         loginUser(body)
             .then((res) => {
-                setUser(res.data)
+                setUser(res.data);
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('nome', res.data.nome);
                 navigate("/")
             })
             .catch((err) => {
