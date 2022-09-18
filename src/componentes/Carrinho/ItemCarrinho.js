@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
-import {BsPlusCircleDotted} from "react-icons/bs";
+import {BsPlusCircle} from "react-icons/bs";
 import {FiMinusCircle} from "react-icons/fi";
 
 export default function ItemCarrinho( {imagem, preco, quantidade, titulo} ) {
     return (
         <EspacoPedido>
             <img src={imagem} alt={"img"}/>
-            <div> {titulo} titulo <br/> R$ {preco} 10,00  </div>
+            <div> {titulo} <br/> R$ {preco} </div>
             <QuantidadeItens> 
                 <div> <FiMinusCircle /> </div>
-                <div>{quantidade} 4 </div>
-                <div> <BsPlusCircleDotted />   </div>  
+                <div>{quantidade} </div>
+                <div> <BsPlusCircle/>   </div>  
             </QuantidadeItens>
         </EspacoPedido>
     )
@@ -28,11 +28,17 @@ const EspacoPedido = styled.div`
     position: relative;
     padding-left: 20px;
     margin: 5px 0px;
+    object-fit: cover;
     
     div {
         display: flex;
         flex-direction: column;
         margin-left: 70px;
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
     }
 `;
 

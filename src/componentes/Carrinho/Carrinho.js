@@ -72,5 +72,6 @@ const EspacoPedidos = styled.div`
     flex-direction: column;
     align-items: center;
     border: 1px solid red;
+    overflow-y: scroll;
 `;
 
