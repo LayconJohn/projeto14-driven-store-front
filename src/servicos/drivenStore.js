@@ -63,12 +63,13 @@ function enviarPedido(token) {
 }
 
 function limparCarrinho(token) {
+  console.log(token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const promisse = axios.delete(`${BASE_URL}/carrinho`, config);
+  const promisse = axios.post(`${BASE_URL}/pedidos`, {}, config);
   return promisse;
 }
 
@@ -91,6 +92,15 @@ function removerDoCarrinho(token, idProduto) {
   const promisse = axios.delete(`${BASE_URL}/carrinho/${idProduto}`, config);
   return promisse;
 }
+function exibirPedido(token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promisse = axios.get(`${BASE_URL}/pedido`, config);
+  return promisse;
+}
 
 export {
   cadastrarUser,
@@ -103,4 +113,5 @@ export {
   removerDoCarrinho,
   adicionarItem,
   exibirItem,
+  exibirPedido,
 };

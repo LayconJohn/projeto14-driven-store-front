@@ -40,6 +40,7 @@ export default function Carrinho() {
               navigate("/pedido");
             })
             .catch((err) => {
+              console.log(err);
               alert("Erro ao limpar o carrinho");
             });
         })
