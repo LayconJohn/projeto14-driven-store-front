@@ -26,6 +26,7 @@ export default function Topo() {
   );
 }
 const Container = styled.div`
+  width: 100vw;
   p {
     font-family: "Lobster", cursive;
     font-size: 50px;
