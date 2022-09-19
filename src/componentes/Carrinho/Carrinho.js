@@ -65,6 +65,7 @@ export default function Carrinho() {
                 return <ItemCarrinho 
                     key={item._id}
                     id={item._id}
+                    idProduto={item.idProduto}
                     imagem={item.imagem}
                     preco={item.preco}
                     quantidade={item.quantidade}

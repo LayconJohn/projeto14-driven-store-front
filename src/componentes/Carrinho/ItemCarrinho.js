@@ -6,15 +6,15 @@ import { removerDoCarrinho, editarProduto } from "../../servicos/drivenStore";
 import {BsPlusCircle} from "react-icons/bs";
 import {FiMinusCircle} from "react-icons/fi";
 
-export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) {
+export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id, idProduto} ) {
     //state
-    const [quantidadePedido, setQuantidadePedido] = useState(quantidade);
+    const [quantidadePedido, setQuantidadePedido] = useState(Number(quantidade));
 
     const token = localStorage.getItem("token");
 
     //logic
     function excluirItemDoCarrinho() {
-        removerDoCarrinho(token, id).then((res) => {
+        removerDoCarrinho(token, idProduto).then((res) => {
             alert("Item removido")
             if (quantidadePedido > 0) {
                 setQuantidadePedido(quantidadePedido - 1)
@@ -23,7 +23,7 @@ export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) 
     }
 
     function editarItemDoCarrinho() {
-        editarProduto(token, id).then((res) => {
+        editarProduto(token, idProduto).then((res) => {
             alert("Item adicionado")
             setQuantidadePedido(quantidadePedido + 1)
         })
