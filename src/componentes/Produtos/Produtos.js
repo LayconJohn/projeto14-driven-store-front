@@ -1,6 +1,10 @@
+
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import Header from "../Header/Header";
 
 import { pegarProdutos } from "../../servicos/drivenStore";
@@ -13,7 +17,7 @@ export default function Produtos() {
     pegarProdutos(token).then((res) => setProdutos(res.data));
   }, []);
   const navigate = useNavigate();
-  console.log(produtos);
+
   return (
     <Container>
       <Header setProdutos={setProdutos} />
