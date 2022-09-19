@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
@@ -38,7 +37,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 `;
 const Catalogo = styled.div`
   margin: 20px auto;

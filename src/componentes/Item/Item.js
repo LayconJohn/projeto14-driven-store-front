@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { FormButton } from "../../assets/globalStyles";
 
-import { exibirItem } from "../../servicos/drivenStore";
+import { adicionarItem, exibirItem } from "../../servicos/drivenStore";
+import Topo from "../../Topo/Topo";
 
 export default function Item() {
   //state
@@ -11,21 +13,20 @@ export default function Item() {
   const [item, setItem] = useState({});
   const [quantidade, setQuantidade] = useState(1);
 
-
   //hooks
   const id = location.state;
   const navigate = useNavigate();
 
   //logic
   useEffect(() => {
-    const promise = axios.get(`http://localhost:5000/produtos/${id}`);
+    const token = localStorage.getItem("token");
+    const promise = exibirItem(id, token);
     promise.then((res) => {
       setItem(res.data);
       console.log(res.data);
     });
 
     console.log("Id: " + id);
-
   }, []);
 
   function addCarrinho() {
@@ -36,11 +37,7 @@ export default function Item() {
       navigate("/login");
       return;
     }
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
+
     const body = {
       id: item._id,
       titulo: item.titulo,
@@ -48,70 +45,80 @@ export default function Item() {
       preco: item.preco,
       quantidade,
     };
-    const promise = exibirItem(body, config, id);
+    const promise = adicionarItem(body, token, id);
     promise.then(() => {
       alert("Adicionado ao Carrinho");
       navigate("/");
     });
   }
 
-    if (item) {
-      return (
-        <Container>
-          <Produto>
-            <Imagem>
-              <img src={item.imagem} alt="item" />
-            </Imagem>
+  if (item) {
+    return (
+      <Container>
+        <Topo />
+        <Produto>
+          <Imagem>
+            <img src={item.imagem} alt="item" />
+          </Imagem>
+
+          <div>
+            <p>{item.titulo}</p>
+            <p>
+              <strong>R${item.preco}</strong>
+            </p>
+
+            <p>
+              Quantidade:
+              <select
+                onChange={(event) => {
+                  setQuantidade(event.target.value);
+                }}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </p>
 
             <div>
-              <p>{item.titulo}</p>
-              <p>
-                <strong>R${item.preco}</strong>
-              </p>
-              <span>
-                <p>Quantidade</p>
-                <select
-                  onChange={(event) => {
-                    setQuantidade(event.target.value);
-                  }}
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </span>
-              <div>
-                <button onClick={() => addCarrinho()}>
-                  Adicionar ao Carrinho
-                </button>
-              </div>
+              <button onClick={() => addCarrinho()}>
+                Adicionar ao Carrinho
+              </button>
             </div>
-          </Produto>
-          <h1>Descrição</h1>
-          <p>{item?.descricao}</p>
-        </Container>
-      );
-    } else {
-      return <p>carregando</p>;
-    }
-    
-  
+          </div>
+        </Produto>
+        <h1>Descrição</h1>
+        <p>{item?.descricao}</p>
+      </Container>
+    );
+  } else {
+    return <p>carregando</p>;
   }
-
+}
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   p {
     margin: 10px;
     text-align: justify;
   }
   h1 {
     margin: 10px;
+  }
+  button {
+    width: 100px;
+    height: 38px;
+    border-radius: 30px;
+    border: 1px solid #cacacc;
+    background-color: #f4f4f4;
+    margin: 15px 10px;
+    color: black;
+    font-size: 12px;
   }
 `;
 const Produto = styled.div`
