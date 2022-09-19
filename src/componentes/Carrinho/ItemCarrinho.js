@@ -1,13 +1,33 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import { removerDoCarrinho, editarProduto } from "../../servicos/drivenStore";
+
 import {BsPlusCircle} from "react-icons/bs";
 import {FiMinusCircle} from "react-icons/fi";
 
-export default function ItemCarrinho( {imagem, preco, quantidade, titulo} ) {
+export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) {
     //state
     const [quantidadePedido, setQuantidadePedido] = useState(quantidade);
 
+    const token = localStorage.getItem("token");
+
+    //logic
+    function excluirItemDoCarrinho() {
+        removerDoCarrinho(token, id).then((res) => {
+            alert("Item removido")
+            if (quantidadePedido > 0) {
+                setQuantidadePedido(quantidadePedido - 1)
+            }
+        })
+    }
+
+    function editarItemDoCarrinho() {
+        editarProduto(token, id).then((res) => {
+            alert("Item adicionado")
+            setQuantidadePedido(quantidadePedido + 1)
+        })
+    }
 
     //render
     return (
@@ -15,9 +35,9 @@ export default function ItemCarrinho( {imagem, preco, quantidade, titulo} ) {
             <img src={imagem} alt={"img"}/>
             <div> {titulo} <br/> R$ {preco} </div>
             <QuantidadeItens> 
-                <div> <FiMinusCircle /> </div>
+                <div onClick={excluirItemDoCarrinho}> <FiMinusCircle /> </div>
                 <div>{quantidadePedido} </div>
-                <div> <BsPlusCircle/>   </div>  
+                <div onClick={editarItemDoCarrinho}> <BsPlusCircle/>   </div>  
             </QuantidadeItens>
         </EspacoPedido>
     )

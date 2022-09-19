@@ -53,6 +53,26 @@ function limparCarrinho(token) {
     return promisse;
 }
 
+function editarProduto(token, idProduto) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.put(`${BASE_URL}/carrinho/${idProduto}`, config);
+    return promisse;
+}
+
+function removerDoCarrinho(token, idProduto) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.delete(`${BASE_URL}/carrinho/${idProduto}`, config);
+    return promisse;
+}
+
 export {
     cadastrarUser,
     loginUser,
@@ -60,4 +80,6 @@ export {
     pegarProdutos,
     enviarPedido,
     limparCarrinho,
+    editarProduto,
+    removerDoCarrinho,
 }

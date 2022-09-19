@@ -64,6 +64,7 @@ export default function Carrinho() {
             carrinho.map( (item, index) => {
                 return <ItemCarrinho 
                     key={item._id}
+                    id={item._id}
                     imagem={item.imagem}
                     preco={item.preco}
                     quantidade={item.quantidade}
