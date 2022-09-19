@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
 
 import { pegarCarrinho, enviarPedido, limparCarrinho } from "../../servicos/drivenStore";
 import { SubTitulo, FormButton, Legenda } from "../../assets/globalStyles";
@@ -9,13 +9,8 @@ import UserContext from "../../Context/UserContext";
 import ItemCarrinho from "./ItemCarrinho";
 
 export default function Carrinho() {
-    //state
-    const [carrinho, setCarrinho] = useState([]);
-    
-    //hooks
-    const {user} = useContext(UserContext);
-    const navigate = useNavigate();
-
+  //state
+  const [carrinho, setCarrinho] = useState([]);
     //logic
     useEffect( () => {
         const token = localStorage.getItem("token");
@@ -76,24 +71,24 @@ export default function Carrinho() {
             <FormButton onClick={finalizarCarrinho}>Finalizar Pedido</FormButton>
         </Tela>
     )
+
 }
 
 const Tela = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 `;
 
 const EspacoPedidos = styled.div`
-    width: 100%;
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #FDFDFC;
-    overflow-y: scroll;
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #fdfdfc;
+  overflow-y: scroll;
 `;
-

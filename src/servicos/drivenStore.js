@@ -1,36 +1,42 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000"
+const BASE_URL = "http://localhost:5000";
 
 function cadastrarUser(body) {
-    const promisse = axios.post(`${BASE_URL}/cadastro`, body);
-    return promisse;
+  const promisse = axios.post(`${BASE_URL}/cadastro`, body);
+  return promisse;
 }
 
 function loginUser(body) {
-    const promisse = axios.post(`${BASE_URL}/login`, body);
-    return promisse;
+  const promisse = axios.post(`${BASE_URL}/login`, body);
+  return promisse;
 }
 
 function pegarProdutos(token) {
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    };
-    const promisse = axios.get(`${BASE_URL}/produtos`, config);
-    return promisse;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promisse = axios.get(`${BASE_URL}/produtos`, config);
+  return promisse;
 }
 
 function pegarCarrinho(token) {
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    };
-    const promisse = axios.get(`${BASE_URL}/carrinho`, config);
-    return promisse;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promisse = axios.get(`${BASE_URL}/carrinho`, config);
+  return promisse;
 }
+
+function exibirItem(body, config, id) {
+  const promisse = axios.post(`${BASE_URL}/carrinho/${id}`, body, config);
+  return promisse;
+}
+
 
 function enviarPedido(token) {
     const config = {
@@ -82,4 +88,6 @@ export {
     limparCarrinho,
     editarProduto,
     removerDoCarrinho,
+    exibirItem
 }
+
