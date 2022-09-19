@@ -39,6 +39,7 @@ export default function Item() {
         preco: item.preco,
       }
 
+
     const promise = axios.post(
       `http://localhost:5000/carrinho/${id}`,
       body,

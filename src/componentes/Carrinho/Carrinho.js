@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 
-import { pegarCarrinho } from "../../servicos/drivenStore";
+import { pegarCarrinho, enviarPedido } from "../../servicos/drivenStore";
 import { SubTitulo, FormButton, Legenda } from "../../assets/globalStyles";
 
 import UserContext from "../../Context/UserContext";
@@ -18,7 +18,7 @@ export default function Carrinho() {
 
     //logic
     useEffect( () => {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
         pegarCarrinho(token)
             .then( (res) => {
                 setCarrinho(res.data);
@@ -30,6 +30,21 @@ export default function Carrinho() {
                 navigate("/login");
             })
     }, [])
+
+    function finalizarCarrinho() {
+        const token = localStorage.getItem("token");
+        if (carrinho.length > 0) {
+            enviarPedido(token)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/pedido");
+            })
+            .catch((err) => {
+                console.log(err.message);
+                alert("Erro ao finalizar o pedido")
+            })
+        }
+    }
 
     //render
     return (
@@ -51,7 +66,7 @@ export default function Carrinho() {
             })
             }
             </EspacoPedidos>
-            <FormButton>Finalizar Pedido</FormButton>
+            <FormButton onClick={finalizarCarrinho}>Finalizar Pedido</FormButton>
         </Tela>
     )
 }

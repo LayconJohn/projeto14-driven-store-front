@@ -32,9 +32,21 @@ function pegarCarrinho(token) {
     return promisse;
 }
 
+function enviarPedido(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+
+    const promisse = axios.post(`${BASE_URL}/pedidos`, null ,config);
+    return promisse;
+}
+
 export {
     cadastrarUser,
     loginUser,
     pegarCarrinho,
     pegarProdutos,
+    enviarPedido,
 }
