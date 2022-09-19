@@ -1,13 +1,11 @@
-import axios from "axios";
 import styled from "styled-components";
+import { categoria } from "../../servicos/drivenStore";
 
 import Topo from "../../Topo/Topo";
 
 export default function Header({ setProdutos }) {
   function listarProdutos(nome) {
-    const promise = axios.get(
-      `http://localhost:5000/produtos?categoria=${nome}`
-    );
+    const promise = categoria(nome);
     promise.then((res) => {
       setProdutos(res.data);
     });

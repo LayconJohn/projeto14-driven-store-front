@@ -72,7 +72,10 @@ function limparCarrinho(token) {
   const promisse = axios.post(`${BASE_URL}/pedidos`, {}, config);
   return promisse;
 }
-
+function categoria(nome) {
+  const promisse = axios.get(`${BASE_URL}/produtos?categoria=${nome}`);
+  return promisse;
+}
 function editarProduto(token, idProduto) {
   const config = {
     headers: {
@@ -124,4 +127,5 @@ export {
   exibirItem,
   exibirPedido,
   confirmarPedido,
+  categoria,
 };
