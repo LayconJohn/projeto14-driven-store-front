@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 
-import { pegarCarrinho, enviarPedido } from "../../servicos/drivenStore";
+import { pegarCarrinho, enviarPedido, limparCarrinho } from "../../servicos/drivenStore";
 import { SubTitulo, FormButton, Legenda } from "../../assets/globalStyles";
 
 import UserContext from "../../Context/UserContext";
@@ -29,6 +29,7 @@ export default function Carrinho() {
                 alert("Faça o login e tente novamente")
                 navigate("/login");
             })
+
     }, [])
 
     function finalizarCarrinho() {
@@ -36,8 +37,13 @@ export default function Carrinho() {
         if (carrinho.length > 0) {
             enviarPedido(token)
             .then((res) => {
-                console.log(res.data);
-                navigate("/pedido");
+                limparCarrinho(token)
+                    .then((res) => {
+                        navigate("/pedido");
+                    })
+                    .catch( (err) => {
+                        alert("Erro ao limpar o carrinho")
+                    })
             })
             .catch((err) => {
                 console.log(err.message);

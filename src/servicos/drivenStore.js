@@ -43,10 +43,21 @@ function enviarPedido(token) {
     return promisse;
 }
 
+function limparCarrinho(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.delete(`${BASE_URL}/carrinho`, config);
+    return promisse;
+}
+
 export {
     cadastrarUser,
     loginUser,
     pegarCarrinho,
     pegarProdutos,
     enviarPedido,
+    limparCarrinho,
 }
