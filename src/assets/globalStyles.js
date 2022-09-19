@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
     margin: 0;
     padding: 25px;
-    background-image: linear-gradient( to bottom, #F4F4F4, #D6D6D6, #B9B9B9, #9C9C9C, #7F7F7F, #626262, #454545);
+    background-image: linear-gradient( to bottom, #E5E5E5, #E5E4E3, #E5E0D1, #E5DBBE, #E5D6AC, 	#E5D29A, #E5CD87);
     background-repeat: space;
     background-position: center;
     background-size: cover;
@@ -77,20 +77,21 @@ button{
 
 const TituloLogo = styled.h1`
   font-size: 35px;
-  color: #14131a;
   font-weight: bold;
-  font-family: "Rubik", sans-serif;
-  font-family: "Rubik Glitch", cursive;
+  font-family: "Lobster", cursive;
+  color: #ffffff;
+  text-shadow: 2px 2px 2px #cfb15c;
   text-align: center;
   position: absolute;
   left: 5px;
   top: 50px;
+  z-index: 1;
 `;
 
 const SubTitulo = styled.h3`
   font-size: 30px;
   font-weight: 700;
-  color: #cacacc;
+  color: #ffffff;
 `;
 
 const Logo = styled.div`
