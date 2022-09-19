@@ -6,19 +6,26 @@ import styled from "styled-components";
 import { exibirItem } from "../../servicos/drivenStore";
 
 export default function Item() {
+  //state
   const location = useLocation();
-  const id = location.state;
-  const navigate = useNavigate();
-  const [item, setItem] = useState();
+  const [item, setItem] = useState({});
   const [quantidade, setQuantidade] = useState(1);
 
+
+  //hooks
+  const id = location.state;
+  const navigate = useNavigate();
+
+  //logic
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
     promise.then((res) => {
       setItem(res.data);
       console.log(res.data);
     });
+
     console.log("Id: " + id);
+
   }, []);
 
   function addCarrinho() {
@@ -48,47 +55,52 @@ export default function Item() {
     });
   }
 
-  if (item) {
-    return (
-      <Container>
-        <Produto>
-          <Imagem>
-            <img src={item.imagem} alt="item" />
-          </Imagem>
-          <div>
-            <p>{item.titulo}</p>
-            <p>
-              <strong>R${item.preco}</strong>
-            </p>
-            <span>
-              <p>Quantidade</p>
-              <select
-                onChange={(event) => {
-                  setQuantidade(event.target.value);
-                }}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </span>
+    if (item) {
+      return (
+        <Container>
+          <Produto>
+            <Imagem>
+              <img src={item.imagem} alt="item" />
+            </Imagem>
+
             <div>
-              <button onClick={() => addCarrinho()}>
-                Adicionar ao Carrinho
-              </button>
+              <p>{item.titulo}</p>
+              <p>
+                <strong>R${item.preco}</strong>
+              </p>
+              <span>
+                <p>Quantidade</p>
+                <select
+                  onChange={(event) => {
+                    setQuantidade(event.target.value);
+                  }}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </span>
+              <div>
+                <button onClick={() => addCarrinho()}>
+                  Adicionar ao Carrinho
+                </button>
+              </div>
             </div>
-          </div>
-        </Produto>
-        <h1>Descrição</h1>
-        <p>{item?.descricao}</p>
-      </Container>
-    );
-  } else {
-    return <p>carregando</p>;
+          </Produto>
+          <h1>Descrição</h1>
+          <p>{item?.descricao}</p>
+        </Container>
+      );
+    } else {
+      return <p>carregando</p>;
+    }
+    
+  
   }
-}
+
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
