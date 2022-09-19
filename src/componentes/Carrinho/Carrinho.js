@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -7,7 +7,7 @@ import {
   enviarPedido,
   limparCarrinho,
 } from "../../servicos/drivenStore";
-import { SubTitulo, FormButton, Legenda } from "../../assets/globalStyles";
+import { SubTitulo, FormButton } from "../../assets/globalStyles";
 
 import ItemCarrinho from "./ItemCarrinho";
 
