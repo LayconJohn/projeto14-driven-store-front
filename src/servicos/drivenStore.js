@@ -101,7 +101,16 @@ function exibirPedido(token) {
   const promisse = axios.get(`${BASE_URL}/pedido`, config);
   return promisse;
 }
-
+function confirmarPedido(form, pedido, token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const body = { pagamento: form, pedido: pedido };
+  const promisse = axios.post(`${BASE_URL}/pedido`, body, config);
+  return promisse;
+}
 export {
   cadastrarUser,
   loginUser,
@@ -114,4 +123,5 @@ export {
   adicionarItem,
   exibirItem,
   exibirPedido,
+  confirmarPedido,
 };
