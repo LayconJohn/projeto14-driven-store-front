@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import UserContext from "../../Context/UserContext";
+
+import { exibirItem } from "../../servicos/drivenStore";
 
 export default function Item() {
   const location = useLocation();
@@ -10,23 +11,22 @@ export default function Item() {
   const navigate = useNavigate();
   const [item, setItem] = useState();
   const [quantidade, setQuantidade] = useState(1);
-  const { user } = useContext(UserContext);
+
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
     promise.then((res) => {
-      setItem(res.data)
+      setItem(res.data);
       console.log(res.data);
     });
     console.log("Id: " + id);
-   
   }, []);
 
-  
   function addCarrinho() {
     console.log(item);
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/");
+      alert("Por favor faça login antes de adicionar itens ao carrinho");
+      navigate("/login");
       return;
     }
     const config = {
@@ -35,26 +35,19 @@ export default function Item() {
       },
     };
     const body = {
-        id: item._id,
-        titulo: item.titulo,
-        imagem: item.imagem,
-        preco: item.preco,
-        quantidade,
-      },
-    ];
-      }
-
-    const promise = axios.post(
-      `http://localhost:5000/carrinho/${id}`,
-      body,
-      config
-    );
+      id: item._id,
+      titulo: item.titulo,
+      imagem: item.imagem,
+      preco: item.preco,
+      quantidade,
+    };
+    const promise = exibirItem(body, config, id);
     promise.then(() => {
       alert("Adicionado ao Carrinho");
       navigate("/");
     });
   }
-  console.log(quantidade);
+
   if (item) {
     return (
       <Container>

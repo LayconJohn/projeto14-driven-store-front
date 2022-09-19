@@ -1,6 +1,3 @@
-
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -8,7 +5,6 @@ import styled from "styled-components";
 import Header from "../Header/Header";
 
 import { pegarProdutos } from "../../servicos/drivenStore";
-
 export default function Produtos() {
   const [produtos, setProdutos] = useState();
 
@@ -61,6 +57,7 @@ const Item = styled.div`
   border-radius: 10px;
   box-shadow: 10px 5px 5px #eeeaea;
   position: relative;
+  cursor: pointer;
   img {
     max-width: 100px;
     max-height: 100px;
