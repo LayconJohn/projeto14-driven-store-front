@@ -32,9 +32,54 @@ function pegarCarrinho(token) {
     return promisse;
 }
 
+function enviarPedido(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+
+    const promisse = axios.post(`${BASE_URL}/pedidos`, null ,config);
+    return promisse;
+}
+
+function limparCarrinho(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.delete(`${BASE_URL}/carrinho`, config);
+    return promisse;
+}
+
+function editarProduto(token, idProduto) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.put(`${BASE_URL}/carrinho/${idProduto}`, config);
+    return promisse;
+}
+
+function removerDoCarrinho(token, idProduto) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    };
+    const promisse = axios.delete(`${BASE_URL}/carrinho/${idProduto}`, config);
+    return promisse;
+}
+
 export {
     cadastrarUser,
     loginUser,
     pegarCarrinho,
     pegarProdutos,
+    enviarPedido,
+    limparCarrinho,
+    editarProduto,
+    removerDoCarrinho,
 }

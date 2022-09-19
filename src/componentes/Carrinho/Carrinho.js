@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 
-import { pegarCarrinho } from "../../servicos/drivenStore";
+import { pegarCarrinho, enviarPedido, limparCarrinho } from "../../servicos/drivenStore";
 import { SubTitulo, FormButton, Legenda } from "../../assets/globalStyles";
 
 import UserContext from "../../Context/UserContext";
@@ -18,7 +18,7 @@ export default function Carrinho() {
 
     //logic
     useEffect( () => {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
         pegarCarrinho(token)
             .then( (res) => {
                 setCarrinho(res.data);
@@ -29,7 +29,28 @@ export default function Carrinho() {
                 alert("Faça o login e tente novamente")
                 navigate("/login");
             })
+
     }, [])
+
+    function finalizarCarrinho() {
+        const token = localStorage.getItem("token");
+        if (carrinho.length > 0) {
+            enviarPedido(token)
+            .then((res) => {
+                limparCarrinho(token)
+                    .then((res) => {
+                        navigate("/pedido");
+                    })
+                    .catch( (err) => {
+                        alert("Erro ao limpar o carrinho")
+                    })
+            })
+            .catch((err) => {
+                console.log(err.message);
+                alert("Erro ao finalizar o pedido")
+            })
+        }
+    }
 
     //render
     return (
@@ -43,6 +64,7 @@ export default function Carrinho() {
             carrinho.map( (item, index) => {
                 return <ItemCarrinho 
                     key={item._id}
+                    id={item._id}
                     imagem={item.imagem}
                     preco={item.preco}
                     quantidade={item.quantidade}
@@ -51,7 +73,7 @@ export default function Carrinho() {
             })
             }
             </EspacoPedidos>
-            <FormButton>Finalizar Pedido</FormButton>
+            <FormButton onClick={finalizarCarrinho}>Finalizar Pedido</FormButton>
         </Tela>
     )
 }
