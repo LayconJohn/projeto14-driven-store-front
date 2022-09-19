@@ -51,26 +51,28 @@ export default function Carrinho() {
     }
   }
 
-  //render
-  return (
-    <Tela>
-      <SubTitulo>Carrinho</SubTitulo>
-      <EspacoPedidos>
-        {carrinho.length === 0
-          ? "Carrinho vazio"
-          : carrinho.map((item, index) => {
-              return (
-                <ItemCarrinho
-                  key={item._id}
-                  id={item._id}
-                  imagem={item.imagem}
-                  preco={item.preco}
-                  quantidade={item.quantidade}
-                  titulo={item.titulo}
+    //render
+    return (
+        <Tela>
+            <SubTitulo>Carrinho</SubTitulo>
+            <EspacoPedidos>
+            {
+            carrinho.length === 0 ? 
+            "Carrinho vazio" 
+            : 
+            carrinho.map( (item, index) => {
+                return <ItemCarrinho 
+                    key={item._id}
+                    id={item._id}
+                    idProduto={item.idProduto}
+                    imagem={item.imagem}
+                    preco={item.preco}
+                    quantidade={item.quantidade}
+                    titulo={item.titulo}
+
                 />
-              );
             })}
-      </EspacoPedidos>
+        </EspacoPedidos>
 
       <FormButton onClick={finalizarCarrinho}>Finalizar Pedido</FormButton>
     </Tela>

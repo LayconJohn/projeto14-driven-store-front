@@ -6,9 +6,10 @@ import { removerDoCarrinho, editarProduto } from "../../servicos/drivenStore";
 import {BsPlusCircle} from "react-icons/bs";
 import {FiMinusCircle} from "react-icons/fi";
 
-export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) {
+export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id, idProduto} ) {
     //state
-    const [quantidadePedido, setQuantidadePedido] = useState(quantidade);
+    const [quantidadePedido, setQuantidadePedido] = useState(Number(quantidade));
+    const [precoPedido, setPrecoPedido] = useState(Number(preco));
 
     const token = localStorage.getItem("token");
 
@@ -18,6 +19,7 @@ export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) 
             alert("Item removido")
             if (quantidadePedido > 0) {
                 setQuantidadePedido(quantidadePedido - 1)
+                setPrecoPedido(quantidadePedido * Number(preco))
             }
         })
     }
@@ -26,6 +28,7 @@ export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) 
         editarProduto(token, id).then((res) => {
             alert("Item adicionado")
             setQuantidadePedido(quantidadePedido + 1)
+            setPrecoPedido(quantidadePedido * Number(preco))
         })
     }
 
@@ -33,7 +36,7 @@ export default function ItemCarrinho( {imagem, preco, quantidade, titulo, id} ) 
     return (
         <EspacoPedido>
             <img src={imagem} alt={"img"}/>
-            <div> {titulo} <br/> R$ {preco} </div>
+            <div> {titulo} <br/> R$ {precoPedido} </div>
             <QuantidadeItens> 
                 <div onClick={excluirItemDoCarrinho}> <FiMinusCircle /> </div>
                 <div>{quantidadePedido} </div>

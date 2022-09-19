@@ -79,7 +79,7 @@ function editarProduto(token, idProduto) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const promisse = axios.put(`${BASE_URL}/carrinho/${idProduto}`, config);
+  const promisse = axios.put(`${BASE_URL}/carrinho/${idProduto}`,null ,config);
   return promisse;
 }
 
