@@ -31,18 +31,20 @@ export default function Login() {
     e.preventDefault();
     setDesabilitado(true);
 
-    const body = { email, senha };
-    loginUser(body)
-      .then((res) => {
-        setUser(res.data);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Email ou senha incorreta");
-        setEmail("");
-        setSenha("");
-      });
+        const body = {email, senha};
+        loginUser(body)
+            .then((res) => {
+                setUser(res.data);
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('nome', res.data.nome);
+                navigate("/")
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Email ou senha incorreta")
+                setEmail("");
+                setSenha("");
+            })
 
     setDesabilitado(false);
   }

@@ -10,6 +10,7 @@ import { GlobalStyle } from "../assets/globalStyles";
 import Item from "./Item/Item";
 
 import Produtos from "./Produtos/Produtos";
+import Carrinho from "./Carrinho/Carrinho";
 
 export default function App() {
 
@@ -24,6 +25,7 @@ export default function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<Produtos />} />
                     <Route path="/produtos/:id" element={<Item />} />
+                    <Route path="/carrinho" element={<Carrinho />} />
                 </Routes>
             </UserContext.Provider>
 

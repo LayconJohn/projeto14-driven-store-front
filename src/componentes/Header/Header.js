@@ -34,7 +34,9 @@ export default function Header({ setProdutos }) {
           <Link to="/login">
             <h2>Login</h2>
           </Link>
-          <h2>Carrinho</h2>
+          <Link to="/carrinho" >
+            <h2>Carrinho</h2>
+          </Link>
         </Menu>
       )}
     </Container>

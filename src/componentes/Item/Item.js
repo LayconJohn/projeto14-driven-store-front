@@ -13,11 +13,18 @@ export default function Item() {
   const { user } = useContext(UserContext);
   useEffect(() => {
     const promise = axios.get(`http://localhost:5000/produtos/${id}`);
-    promise.then((res) => setItem(res.data));
+    promise.then((res) => {
+      setItem(res.data)
+      console.log(res.data);
+    });
+    console.log("Id: " + id);
+   
   }, []);
 
-  const token = user.token;
+  
   function addCarrinho() {
+    console.log(item);
+    const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
       return;
@@ -27,8 +34,7 @@ export default function Item() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const body = [
-      {
+    const body = {
         id: item._id,
         titulo: item.titulo,
         imagem: item.imagem,
@@ -36,6 +42,8 @@ export default function Item() {
         quantidade,
       },
     ];
+      }
+
     const promise = axios.post(
       `http://localhost:5000/carrinho/${id}`,
       body,
