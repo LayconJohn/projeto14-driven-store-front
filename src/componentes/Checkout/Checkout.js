@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { confirmarPedido, exibirPedido } from "../../servicos/drivenStore";
 import styled from "styled-components";
 import { SubTitulo, FormButton, FormInput } from "../../assets/globalStyles";
@@ -35,9 +35,15 @@ export default function Checkout() {
   function finalizarPedido() {
     setOculto(false);
   }
-
+  function enviarPedido() {
+    const promisse = confirmarPedido(form, pedido, token);
+    promisse.then((res) => {
+      alert("Pedido Finalizado");
+      navigate("/");
+    });
+  }
   if (!pedido) return <>Carregando</>;
-
+  console.log(form);
   return (
     <Tela>
       <SubTitulo>Pedido</SubTitulo>
@@ -72,7 +78,7 @@ export default function Checkout() {
           <FormInput
             placeholder="Numero do Cartão"
             type="text"
-            value={Form.numero}
+            name="numero"
             onChange={(e) =>
               handleForm({ name: e.target.name, value: e.target.value })
             }
@@ -81,7 +87,7 @@ export default function Checkout() {
           <FormInput
             placeholder="Nome do Titular"
             type="text"
-            value={form.nome}
+            name="nome"
             onChange={(e) =>
               handleForm({ name: e.target.name, value: e.target.value })
             }
@@ -90,7 +96,7 @@ export default function Checkout() {
           <FormInput
             placeholder="CVV"
             type="password"
-            value={form.cvv}
+            name="cvv"
             onChange={(e) =>
               handleForm({ name: e.target.name, value: e.target.value })
             }
@@ -99,13 +105,13 @@ export default function Checkout() {
           <FormInput
             placeholder="Data de validade MM/AA"
             type="text"
-            value={form.data}
+            name="data"
             onChange={(e) =>
               handleForm({ name: e.target.name, value: e.target.value })
             }
             required
           />
-          <FormButton onClick={() => confirmarPedido(form, pedido, token)}>
+          <FormButton onClick={() => enviarPedido()}>
             Confirmar Pagamento
           </FormButton>
         </>
