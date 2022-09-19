@@ -12,9 +12,10 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     font-family: Open-Sans, Helvetica, Sans-Serif;
     font-family: 'Rubik', sans-serif;
+    font-family: 'Raleway', sans-serif;
   }
   
-  html, body, div, span, applet, object, iframe,
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -39,11 +40,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-  	font-family: 'Raleway', sans-serif;
-background-color: #f4f4f4;
-}
+
 ol, ul {
 	list-style: none;
 }
@@ -78,33 +75,30 @@ button{
 
 `;
 
-
-
 const TituloLogo = styled.h1`
   font-size: 35px;
-  color: #14131A;
+  color: #14131a;
   font-weight: bold;
-  font-family: 'Rubik', sans-serif;
-  font-family: 'Rubik Glitch', cursive;
+  font-family: "Rubik", sans-serif;
+  font-family: "Rubik Glitch", cursive;
   text-align: center;
   position: absolute;
   left: 5px;
   top: 50px;
-
 `;
 
 const SubTitulo = styled.h3`
   font-size: 30px;
   font-weight: 700;
-  color: #CACACC;
-`
+  color: #cacacc;
+`;
 
 const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 30px; 
+  margin-top: 30px;
 
   img {
     width: 150px;
@@ -117,7 +111,7 @@ const FormInput = styled.input`
   width: 326px;
   height: 58px;
   border-radius: 15px;
-  border: 1px solid #CACACC;
+  border: 1px solid #cacacc;
   background-color: rgba(255, 255, 255, 0.05);
   color: white;
   margin: 5px 10px;
@@ -128,7 +122,7 @@ const FormButton = styled.button`
   width: 326px;
   height: 58px;
   border-radius: 30px;
-  border: 1px solid #CACACC;
+  border: 1px solid #cacacc;
   background-color: transparent;
   margin: 15px 10px;
   color: white;
@@ -141,12 +135,11 @@ const Legenda = styled.p`
 `;
 
 export {
-  GlobalStyle, 
+  GlobalStyle,
   TituloLogo,
   Logo,
   SubTitulo,
   FormInput,
   FormButton,
   Legenda,
-}
-
+};
